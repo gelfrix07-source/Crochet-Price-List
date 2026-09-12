@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import { getPublicImageUrl } from '../services/storageService'
 import { AvailabilityBadge, FeatureBadge } from './Badge'
-import MessageToOrderButton from './MessageToOrderButton'
+import { useCart } from '../contexts/CartContext.jsx'
 
 export default function ProductCard({ product }) {
   const imageUrl = getPublicImageUrl(product.image_path)
+  const { addItem } = useCart()
 
   return (
     <div className="card group flex flex-col overflow-hidden transition-transform duration-150 hover:-translate-y-1">
@@ -50,14 +51,16 @@ export default function ProductCard({ product }) {
         </div>
 
         <div className="flex flex-col gap-2 pt-1 sm:flex-row">
-          <Link to={`/product/${product.id}`} className="btn-secondary flex-1 !px-4 !py-2 text-sm">
-            View Details
-          </Link>
-          <MessageToOrderButton
-            productName={product.name}
-            className="flex-1 !px-4 !py-2 text-sm"
-          />
-        </div>
+  <Link to={`/product/${product.id}`} className="btn-secondary flex-1 !px-4 !py-2 text-sm">
+    View Details
+  </Link>
+  <button
+    onClick={() => addItem(product)}
+    className="btn-primary flex-1 !px-4 !py-2 text-sm"
+  >
+    🧺 Add to Cart
+  </button>
+</div>
       </div>
     </div>
   )
