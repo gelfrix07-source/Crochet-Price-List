@@ -1,11 +1,13 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import Logo from '../components/Logo'
 import { useSiteSettings } from '../contexts/SettingsContext.jsx'
+import { useCart } from '../contexts/CartContext.jsx'
 import { getPublicImageUrl } from '../services/storageService'
 
 export default function CustomerLayout() {
   const location = useLocation()
   const { settings } = useSiteSettings()
+  const { totalItems } = useCart()
   const logoUrl = getPublicImageUrl(settings?.logo_path)
 
   return (
@@ -32,6 +34,19 @@ export default function CustomerLayout() {
             >
               Price List
             </Link>
+            <Link
+  to="/cart"
+  className={`relative rounded-full px-4 py-2 transition-colors ${
+    location.pathname.startsWith('/cart') ? 'bg-daisy/60 text-ink' : 'text-ink-soft hover:text-ink'
+  }`}
+>
+  🧺 Cart
+  {totalItems > 0 && (
+    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-peach text-[10px] font-bold text-surface">
+      {totalItems}
+    </span>
+  )}
+</Link>
           </nav>
         </div>
         <div className="stitch-divider" />
