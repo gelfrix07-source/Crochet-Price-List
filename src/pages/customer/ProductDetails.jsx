@@ -3,12 +3,13 @@ import { Link, useParams } from 'react-router-dom'
 import { fetchProductById } from '../../services/productService'
 import { getPublicImageUrl } from '../../services/storageService'
 import { AvailabilityBadge, FeatureBadge } from '../../components/Badge'
-import MessageToOrderButton from '../../components/MessageToOrderButton'
+import { useCart } from '../../contexts/CartContext.jsx'
 import { Spinner } from '../../components/LoadingStates'
 import { ErrorState } from '../../components/EmptyState'
 
 export default function ProductDetails() {
   const { id } = useParams()
+  const { addItem } = useCart()
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -119,7 +120,9 @@ export default function ProductDetails() {
             </p>
           )}
 
-          <MessageToOrderButton productName={product.name} full />
+          <button onClick={() => addItem(product)} className="btn-primary w-full">
+  🧺 Add to Cart
+</button>
         </div>
       </div>
     </div>
