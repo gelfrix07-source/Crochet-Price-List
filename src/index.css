@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-ink font-body antialiased;
+    background-image: radial-gradient(circle at 15% 0%, #F3E9DE 0%, #FBF6EE 45%, #FBF6EE 100%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid #BB8588;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-blush-fade bg-peach px-6 py-3
+      font-body font-semibold text-surface shadow-gentle transition-transform duration-150
+      hover:-translate-y-0.5 hover:shadow-soft active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-peach/40 bg-surface
+      px-6 py-3 font-body font-semibold text-ink transition-colors duration-150 hover:border-peach hover:bg-surface-soft;
+  }
+
+  .card {
+    @apply rounded-stitch border border-ink/5 bg-surface shadow-gentle;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border-2 border-transparent bg-daisy/60 px-4 py-2
+      font-body text-sm font-medium text-ink transition-colors duration-150 hover:bg-daisy;
+  }
+
+  .chip-active {
+    @apply border-peach bg-peach text-surface hover:bg-peach;
+  }
+
+  .input-field {
+    @apply w-full rounded-cozy border-2 border-ink/10 bg-surface px-4 py-3 font-body text-ink
+      placeholder:text-ink-soft/70 focus:border-peach focus:outline-none;
+  }
+
+  .label-field {
+    @apply mb-1.5 block font-body text-sm font-semibold text-ink-soft;
+  }
+}
+
+.stitch-divider {
+  background-image: radial-gradient(circle, #D8A48F 2px, transparent 2.5px);
+  background-size: 14px 14px;
+  background-repeat: repeat-x;
+  background-position: center;
+  height: 6px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #F3E9DE 25%, #EFEBCE 37%, #F3E9DE 63%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
