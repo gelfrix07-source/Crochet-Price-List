@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/customer/Home'
 import PriceList from './pages/customer/PriceList'
 import ProductDetails from './pages/customer/ProductDetails'
+import Cart from './pages/customer/Cart'
 
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -19,10 +20,11 @@ export default function App() {
     <Routes>
       {/* Public customer routes */}
       <Route element={<CustomerLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/prices" element={<PriceList />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-      </Route>
+  <Route path="/" element={<Home />} />
+  <Route path="/prices" element={<PriceList />} />
+  <Route path="/product/:id" element={<ProductDetails />} />
+  <Route path="/cart" element={<Cart />} />
+</Route>
 
       {/* Admin login (outside the protected admin layout) */}
       <Route path="/admin/login" element={<AdminLogin />} />
